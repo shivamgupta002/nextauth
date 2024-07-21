@@ -14,9 +14,8 @@ export default function VerifyEmailPage() {
 
   const verifyUserEmail = async () => {
     try {
-     const response= await axios.post("/api/users/verifyemail", { token });
-     console.log(response);
-     
+      const response = await axios.post("/api/users/verifyemail", { token });
+      console.log(response);
       setVerified(true);
       setError(false);
     } catch (error: any) {
@@ -34,18 +33,25 @@ export default function VerifyEmailPage() {
     // const urlToken = query.token;
   }, []);
 
-  useEffect(() => {
-    setError(false);
-    if (token.length > 0) {
-      verifyUserEmail();
-    }
-  }, [token]);
-
+  // useEffect(() => {
+  //   setError(false);
+  //   if (token.length > 0) {
+  //     verifyUserEmail();
+  //   }
+  // }, [token]);
   return (
     <>
       <div>
         <h1>Verify email</h1>
-        <h2>{token ? `${token}` : "no token found"}</h2>
+        {/* <h2>{token ? `${token}` : "no token found"}</h2> */}
+        <h2>
+          {token ? (
+            <button onClick={verifyUserEmail}>Click to verify</button>
+          ) : (
+            "no token found"
+          )}
+        </h2>
+
         {verified && (
           <div>
             <h2>Verified</h2>
